@@ -15,41 +15,45 @@ This Flutter application demonstrates a booking system for co-working spaces. Us
 - Notifications Screen for booking alerts  
 
 ## Architecture & Folder Structure
+<div class="folder-structure">
+<pre>
 lib/
 │
 ├── models/
-│ ├── coworking_space.dart
-│ ├── booking.dart
-│ └── notification_model.dart
+│   ├── coworking_space.dart
+│   ├── booking.dart
+│   └── notification_model.dart
 │
 ├── providers/
-│ ├── app_providers.dart
-│ └── app_providers.g.dart
+│   ├── app_providers.dart
+│   └── app_providers.g.dart
 │
 ├── screens/
-│ ├── splash_screen.dart
-│ ├── home_screen.dart
-│ ├── map_screen.dart
-│ ├── space_detail_screen.dart
-│ ├── booking_screen.dart
-│ ├── my_bookings_screen.dart
-│ └── notifications_screen.dart
+│   ├── splash_screen.dart
+│   ├── home_screen.dart
+│   ├── map_screen.dart
+│   ├── space_detail_screen.dart
+│   ├── booking_screen.dart
+│   ├── my_bookings_screen.dart
+│   └── notifications_screen.dart
 │
 ├── services/
-│ └── notification_service.dart
+│   └── notification_service.dart
 │
 ├── widgets/
-│ ├── loading_widget.dart
-│ └── error_widget.dart
+│   ├── loading_widget.dart
+│   └── error_widget.dart
 │
 ├── utils/
-│ └── date_utils.dart
+│   └── date_utils.dart
 │
 ├── constants/
-│ └── app_constants.dart
+│   └── app_constants.dart
 │
 └── themes/
-└── app_theme.dart
+    └── app_theme.dart
+</pre>
+</div>
 
 markdown
 Copy
