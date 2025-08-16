@@ -4,7 +4,7 @@
 This Flutter application demonstrates a booking system for co-working spaces. Users can browse coworking branches, view details, make bookings, and manage their reservations. Notifications are integrated for booking updates.
 
 **State Management:** Riverpod
-
+**Local storage:**shared preferences
 ## Features
 - Splash Screen with animated logo and app name  
 - Home Screen listing co-working branches with search and filter  
