@@ -1,79 +1,3 @@
-// // Map screen
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:go_router/go_router.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
-//
-// import '../models/coworking_space.dart';
-// import '../providers/app_providers.dart';
-// import '../widgets/loading_widget.dart';
-//
-// class MapScreen extends ConsumerStatefulWidget {
-//   const MapScreen({super.key});
-//
-//   @override
-//   ConsumerState<MapScreen> createState() => _MapScreenState();
-// }
-//
-// class _MapScreenState extends ConsumerState<MapScreen> {
-//   GoogleMapController? _controller;
-//   final Set<Marker> _markers = {};
-//
-//   static const CameraPosition _initialPosition = CameraPosition(
-//     target: LatLng(10.8505, 76.2711), // Center of Kerala
-//     zoom: 7,
-//   );
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final spacesAsync = ref.watch(coworkingSpacesProvider);
-//
-//     return Scaffold(
-//       appBar: AppBar(
-//         leading: IconButton(
-//           onPressed: context.pop,
-//
-//           icon: Icon(CupertinoIcons.back),
-//         ),
-//         title: const Text('Map View'),
-//         backgroundColor: const Color(0xFF2196F3),
-//         foregroundColor: Colors.white,
-//       ),
-//       body: spacesAsync.when(
-//         data: (spaces) {
-//           _updateMarkers(spaces);
-//           return GoogleMap(
-//             initialCameraPosition: _initialPosition,
-//             markers: _markers,
-//             onMapCreated: (GoogleMapController controller) {
-//               _controller = controller;
-//             },
-//           );
-//         },
-//         loading: () => LoadingWidget(),
-//         error: (error, stack) => Center(child: Text('Error: $error')),
-//       ),
-//     );
-//   }
-//
-//   void _updateMarkers(List<CoworkingSpace> spaces) {
-//     _markers.clear();
-//     for (final space in spaces) {
-//       _markers.add(
-//         Marker(
-//           markerId: MarkerId(space.id),
-//           position: LatLng(space.latitude, space.longitude),
-//           infoWindow: InfoWindow(
-//             title: space.name,
-//             snippet: '₹${space.pricePerHour.toInt()}/hr',
-//             onTap: () => context.push('/space/${space.id}'),
-//           ),
-//         ),
-//       );
-//     }
-//   }
-// }
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -664,6 +588,8 @@ class _MapScreenState extends ConsumerState<MapScreen>
                 ? BitmapDescriptor.hueBlue
                 : BitmapDescriptor.hueRed,
           ),
+          // 👇 ADD THIS
+          zIndex: _selectedSpace?.id == space.id ? 0 : 1,
         ),
       );
     }
@@ -676,11 +602,16 @@ class _MapScreenState extends ConsumerState<MapScreen>
 
     _slideController.forward();
     _fadeController.forward();
-
-    // Move camera to selected space
     _controller?.animateCamera(
-      CameraUpdate.newLatLngZoom(LatLng(space.latitude, space.longitude), 10.0),
+      CameraUpdate.newLatLngZoom(
+        LatLng(space.latitude + 0.07, space.longitude), // shift north ~0.03
+        12.0,
+      ),
     );
+
+    // _controller?.animateCamera(
+    //   CameraUpdate.newLatLngZoom(LatLng(space.latitude, space.longitude), 25.0),
+    // );
   }
 
   void _hideSpaceCard() {

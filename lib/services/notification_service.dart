@@ -24,6 +24,22 @@ class NotificationService {
         );
 
     await _notifications.initialize(initializationSettings);
+
+    // 👇 Add this: create the channel
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+      'booking_channel', // id
+      'Booking Notifications', // name
+      description: 'Notifications for booking updates',
+      importance: Importance.high,
+    );
+
+    await _notifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(channel);
+
+    await _notifications.initialize(initializationSettings);
   }
 
   static Future<void> showNotification({
@@ -51,8 +67,6 @@ class NotificationService {
     await _notifications.show(id, title, body, platformChannelSpecifics);
   }
 
-  /// Call this once (after initialize) to trigger a dynamic notification
-  /// every minute. First notification is shown after 1 minute.
   static void startBookingReminder() {
     final List<String> messages = [
       'Booking is waiting! Come and book Innerspace now.',
