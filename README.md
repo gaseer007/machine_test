@@ -113,5 +113,5 @@ Ensuring responsive design across multiple screen sizes
 Handling state updates efficiently across multiple screens
 
 Time Spent
-Approximately 20–25 hours including setup, UI, state management, and testing.
+Approximately 8–10 hours including setup, UI, state management, and testing.
 
